@@ -1,0 +1,19 @@
+[project]
+name = "quickmeme"
+version = "0.1.0"
+description = "Render popular meme templates locally from the terminal."
+requires-python = ">=3.9"
+dependencies = ["pillow>=10", "pyyaml>=6"]
+
+[project.scripts]
+quickmeme = "quickmeme.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/quickmeme"]
