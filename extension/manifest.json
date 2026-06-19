@@ -1,0 +1,33 @@
+{
+  "manifest_version": "0.4",
+  "name": "quickmeme",
+  "display_name": "quickmeme",
+  "version": "0.1.0",
+  "description": "Make memes in plain English. Ask Claude for a meme; it picks a template, fills the text, and copies the PNG to your clipboard.",
+  "author": {
+    "name": "jrdn1891",
+    "url": "https://github.com/jrdn1891"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrdn1891/quickmeme"
+  },
+  "homepage": "https://github.com/jrdn1891/quickmeme",
+  "keywords": ["meme", "memes", "images", "fun"],
+  "server": {
+    "type": "uv",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": ["run", "--directory", "${__dirname}", "server/main.py"]
+    }
+  },
+  "tools": [
+    { "name": "search", "description": "Find meme templates by name or keyword." },
+    { "name": "make", "description": "Render a meme and copy it to the clipboard." }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "python": ">=3.10.0" }
+  }
+}

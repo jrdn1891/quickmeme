@@ -1,0 +1,9 @@
+[project]
+name = "quickmeme-extension"
+version = "0.1.0"
+description = "quickmeme MCP server bundle for Claude Desktop"
+requires-python = ">=3.10"
+dependencies = ["quickmeme[mcp] @ git+https://github.com/jrdn1891/quickmeme"]
+
+[tool.uv]
+package = false
