@@ -1,48 +1,46 @@
-# quickmeme
+<p align="center">
+  <img src="docs/hero.png" alt="quickmeme" width="340">
+</p>
 
-Render popular meme templates locally from the terminal. No browser, no editor,
-no screenshot — pick a template, fill the text, and the PNG lands on your
-clipboard ready to paste.
+<h1 align="center">quickmeme</h1>
 
-Built for an agent to drive: `search` to discover templates and their text
-boxes, `make` to render.
+<p align="center">
+  React with a meme without leaving your terminal.<br>
+  Your agent picks a template, fills in the text, and the PNG lands on your clipboard.
+</p>
+
+---
+
+That meme up top was made with quickmeme:
+
+```sh
+quickmeme make drake "going to a web app, editing by hand, screenshot, save, share" "the quickmeme CLI, right from your agent"
+```
 
 ## Install
 
 ```sh
-uv tool install .        # global `quickmeme` command
-# or, in-repo during development:
-uv run quickmeme ...
+uv tool install git+https://github.com/jrdn1891/quickmeme
 ```
 
-## Usage
+## Use it
 
 ```sh
-quickmeme search drake          # find templates by name/keyword
-quickmeme list                  # all 209 templates
-quickmeme make drake "writing comments" "letting the code speak"
+quickmeme search drake        # find a template and see its text boxes
+quickmeme list                # all 209 templates
+quickmeme make drake "left on unread" "left on read"
 ```
 
-`make` renders to `~/.quickmeme/out/`, copies the PNG to the clipboard, and
-opens it in Preview. Text is given per box, in order — `search` shows each
-template's box count and an example.
+`make` renders the meme, copies the PNG to your clipboard, and opens it in Preview.
+Text maps to the template's boxes in order — `search` tells you how many each one has.
 
-Flags: `--out PATH`, `--no-copy`, `--no-open`. `search`/`list` take `--json`
-for machine-readable output.
+It's built to be driven by a coding agent: `search` to discover, `make` to render.
+No browser, no manual editing, no screenshot.
 
 ## How it works
 
-- **Templates** (`src/quickmeme/templates/`) are vendored from
-  [memegen](https://github.com/jacebrowning/memegen) (MIT) — each is an image
-  plus a `config.yml` defining normalized text boxes (position, font, color,
-  alignment, rotation). This is the single source of truth; re-vendor with
-  `scripts/vendor.py`.
-- **Rendering** (`render.py`) uses Pillow: text is case-styled, word-wrapped,
-  auto-fit to its box, stroked, and rotated to match the template.
-- **Fonts**: system Impact / Comic Sans on macOS, with bundled
-  [Anton](https://fonts.google.com/specimen/Anton) (OFL) as the offline fallback.
+- 209 templates (image + text-box geometry) vendored from [memegen](https://github.com/jacebrowning/memegen) (MIT).
+- Rendering is fully local via Pillow: case styling, word-wrap, auto-fit, outline, and per-box rotation.
+- Fonts: system Impact / Comic Sans, with bundled [Anton](https://fonts.google.com/specimen/Anton) (OFL) as the offline fallback.
 
-## Roadmap
-
-- Fill boxes with images (faces/logos) via the template `overlay` geometry.
-- `quickmeme sync` to refresh the catalog from upstream memegen.
+Clipboard and Preview use macOS tools (`osascript` / `open`); the rendering itself runs anywhere.
