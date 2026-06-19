@@ -2,11 +2,15 @@
 name = "quickmeme"
 version = "0.1.0"
 description = "Render popular meme templates locally from the terminal."
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["pillow>=10", "pyyaml>=6"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.2"]
 
 [project.scripts]
 quickmeme = "quickmeme.cli:main"
+quickmeme-mcp = "quickmeme.mcp:main"
 
 [dependency-groups]
 dev = ["pytest>=8"]
